@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="12dp"
+    tools:context=".RegisterActivity">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        app:backgroundTint="@null"
+        android:background="@drawable/edit_text_background"
+        android:hint="Username" />
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        app:backgroundTint="@null"
+        android:background="@drawable/edit_text_background"
+        android:hint="Name" />
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        app:backgroundTint="@null"
+        android:background="@drawable/edit_text_background"
+        android:hint="Email" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        app:backgroundTint="@null"
+        android:background="@drawable/edit_text_background"
+        android:hint="Password" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_background"
+        app:backgroundTint="@null"
+        android:text="Register"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/login_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:text="Already a user? Login"
+        android:textAlignment="center"
+        />
+
+</LinearLayout>
