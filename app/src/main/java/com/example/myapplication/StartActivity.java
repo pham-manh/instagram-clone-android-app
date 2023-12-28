@@ -17,8 +17,6 @@ public class StartActivity extends AppCompatActivity {
 
     private ImageView iconImage;
     private LinearLayout linearLayout;
-    private Button btnLogin;
-    private Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +25,8 @@ public class StartActivity extends AppCompatActivity {
 
         iconImage = findViewById(R.id.iconLogo);
         linearLayout = findViewById(R.id.linear_layout);
-        btnLogin = findViewById(R.id.btnLogin);
-        btnRegister = findViewById(R.id.btnRegister);
+        Button btnLogin = findViewById(R.id.btnLogin);
+        Button btnRegister = findViewById(R.id.btnRegister);
 
         linearLayout.animate().alpha(0f).setDuration(50);
 

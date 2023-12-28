@@ -13,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -30,23 +32,27 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText name;
     private EditText email;
     private EditText password;
-    private TextView loginUser;
-    private Button registerBtn;
 
     private DatabaseReference mRootRef;
     private FirebaseAuth mAuth;
 
+    public RegisterActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_register);
+
+
 
         username = findViewById(R.id.username);
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        registerBtn.findViewById(R.id.btnRegister);
-        loginUser.findViewById(R.id.login_user);
+        Button registerBtn = findViewById(R.id.btnRegister);
+        TextView loginUser = findViewById(R.id.login_user);
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -87,11 +93,11 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         HashMap<String, Object> map = new HashMap<>();
-                        map.put("username",username);
-                        map.put("name",name);
-                        map.put("email",email);
-                        map.put("password",password);
-                        map.put("id",mAuth.getCurrentUser().getUid());
+                        map.put("username", username);
+                        map.put("name", name);
+                        map.put("email", email);
+                        map.put("password", password);
+                        map.put("id", mAuth.getCurrentUser().getUid());
 
                         mRootRef.child("Users")
                                 .child(mAuth.getCurrentUser()
@@ -100,7 +106,24 @@ public class RegisterActivity extends AppCompatActivity {
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(RegisterActivity.this,
+                                                    "Update the Profile for better experience",
+                                                    Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(RegisterActivity.this,
+                                                    MainActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            startActivity(intent);
+                                            finish();
+                                        }
 
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(RegisterActivity.this, e.getMessage(),
+                                                Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
