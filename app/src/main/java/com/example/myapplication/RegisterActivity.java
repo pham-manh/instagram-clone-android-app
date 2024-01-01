@@ -87,7 +87,12 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String username, String name, String email, String password) {
+    private void registerUser(String username, String name, String email, String password) throws NullPointerException {
+
+        /*
+        TODO: 1. đặt log để debug
+        TODO: 2. xem cách lưu data bằng firestore
+        */
         mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(
                 new OnSuccessListener<AuthResult>() {
                     @Override

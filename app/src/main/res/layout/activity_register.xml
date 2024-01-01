@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     android:padding="12dp"
     tools:context=".RegisterActivity">
 
@@ -13,45 +13,57 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        app:srcCompat="@drawable/logo" />
+        android:contentDescription="Logo App"
+        app:srcCompat="@drawable/logo"
+        tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:background="@drawable/edit_text_background"
+        android:inputType="text"
+        android:hint="Username"
         android:padding="10dp"
         app:backgroundTint="@null"
-        android:background="@drawable/edit_text_background"
-        android:hint="Username" />
+        tools:ignore="Autofill, HardcodedText" />
+
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:background="@drawable/edit_text_background"
+        android:inputType="text"
+        android:hint="Name"
         android:padding="10dp"
         app:backgroundTint="@null"
-        android:background="@drawable/edit_text_background"
-        android:hint="Name" />
+        tools:ignore="Autofill, HardcodedText" />
+
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:background="@drawable/edit_text_background"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
         android:padding="10dp"
         app:backgroundTint="@null"
-        android:background="@drawable/edit_text_background"
-        android:hint="Email" />
+        tools:ignore="Autofill, HardcodedText" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:background="@drawable/edit_text_background"
+        android:inputType="textPassword"
+        android:hint="Password"
         android:padding="10dp"
         app:backgroundTint="@null"
-        android:background="@drawable/edit_text_background"
-        android:hint="Password" />
+        tools:ignore="Autofill, HardcodedText" />
 
     <Button
         android:id="@+id/btnRegister"
@@ -59,19 +71,19 @@
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/button_background"
-        app:backgroundTint="@null"
         android:text="Register"
         android:textColor="@color/black"
-        />
+        app:backgroundTint="@null"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/login_user"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:padding="10dp"
         android:text="Already a user? Login"
         android:textAlignment="center"
-        />
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>
