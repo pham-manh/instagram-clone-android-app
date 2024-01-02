@@ -1,24 +1,15 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,15 +27,10 @@ public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference mRootRef;
     private FirebaseAuth mAuth;
 
-    public RegisterActivity() {
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_register);
-
 
 
         username = findViewById(R.id.username);
@@ -54,87 +40,67 @@ public class RegisterActivity extends AppCompatActivity {
         Button registerBtn = findViewById(R.id.btnRegister);
         TextView loginUser = findViewById(R.id.login_user);
 
-        mRootRef = FirebaseDatabase.getInstance().getReference();
+        mRootRef = FirebaseDatabase
+                .getInstance("https://instagram-clone-784ff-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference();
+
         mAuth = FirebaseAuth.getInstance();
 
-        loginUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-            }
-        });
+        loginUser.setOnClickListener(view -> startActivity(new Intent(RegisterActivity.this,
+                LoginActivity.class)));
 
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String txtUsername = username.getText().toString();
-                String txtName = name.getText().toString();
-                String txtEmail = email.getText().toString();
-                String txtPassword = password.getText().toString();
+        registerBtn.setOnClickListener(view -> {
+            String txtUsername = username.getText().toString();
+            String txtName = name.getText().toString();
+            String txtEmail = email.getText().toString();
+            String txtPassword = password.getText().toString();
 
-                if (TextUtils.isEmpty(txtUsername) || TextUtils.isEmpty(txtName)
-                        || TextUtils.isEmpty(txtEmail) || TextUtils.isEmpty(txtPassword)) {
-                    Toast.makeText(RegisterActivity.this, "Empty credentials!!",
-                            Toast.LENGTH_SHORT).show();
-                } else if (txtPassword.length() < 6) {
-                    Toast.makeText(RegisterActivity.this, "Password is too short!",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    registerUser(txtUsername, txtName, txtEmail, txtPassword);
-                }
-
+            if (TextUtils.isEmpty(txtUsername)
+                    || TextUtils.isEmpty(txtName)
+                    || TextUtils.isEmpty(txtEmail)
+                    || TextUtils.isEmpty(txtPassword)) {
+                Toast.makeText(RegisterActivity.this, "Empty credentials!!", Toast.LENGTH_SHORT).show();
+            } else if (txtPassword.length() < 6) {
+                Toast.makeText(RegisterActivity.this, "Password is too short!", Toast.LENGTH_SHORT).show();
+            } else {
+                registerUser(txtUsername, txtName, txtEmail, txtPassword);
             }
         });
     }
 
     private void registerUser(String username, String name, String email, String password) throws NullPointerException {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(
+                        authResult -> {
+                            String uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-        /*
-        TODO: 1. đặt log để debug
-        TODO: 2. xem cách lưu data bằng firestore
-        */
-        mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(
-                new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        HashMap<String, Object> map = new HashMap<>();
-                        map.put("username", username);
-                        map.put("name", name);
-                        map.put("email", email);
-                        map.put("password", password);
-                        map.put("id", mAuth.getCurrentUser().getUid());
+                            HashMap<String, Object> newUser = new HashMap<>();
+                            newUser.put("username", username);
+                            newUser.put("name", name);
+                            newUser.put("email", email);
+                            newUser.put("password", password);
+                            newUser.put("id", uid);
 
-                        mRootRef.child("Users")
-                                .child(mAuth.getCurrentUser()
-                                        .getUid())
-                                .setValue(map)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(RegisterActivity.this,
-                                                    "Update the Profile for better experience",
-                                                    Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(RegisterActivity.this,
-                                                    MainActivity.class);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            startActivity(intent);
-                                            finish();
-                                        }
+                            mRootRef.child("Users")
+                                    .child(uid)
+                                    .setValue(newUser)
+                                    .addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(RegisterActivity.this,
+                                                                    "Update the Profile for better experience", Toast.LENGTH_SHORT)
+                                                            .show();
 
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(RegisterActivity.this, e.getMessage(),
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
 
-                    }
-                }
-        );
-
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }
+                                    );
+                        })
+                .addOnFailureListener(exception -> Toast.makeText(RegisterActivity.this, exception.getMessage(),
+                        Toast.LENGTH_SHORT).show()
+                );
     }
 }
