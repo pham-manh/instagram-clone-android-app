@@ -6,11 +6,14 @@
 const functions = require("firebase-functions");
 const nodemailer = require("nodemailer");
 
+const gmailEmail = functions.config().gmail.email;
+const gmailPassword = functions.config().gmail.password;
+
 const mailTransport = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "manhk979@gmail.com",
-    pass: "Manh.dev0903",
+    user: gmailEmail,
+    pass: gmailPassword,
   },
 });
 
@@ -23,7 +26,6 @@ exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
   return sendWelcomeEmail(email, dispplayName);
 });
 
-
 async function sendWelcomeEmail(email, dispplayName) {
   const mailOptions = {
     from: `${APP_NAME}<noreply@firebaseConfig.com`,
@@ -35,7 +37,12 @@ async function sendWelcomeEmail(email, dispplayName) {
     dispplayName || ""
   }! Welcome to ${APP_NAME}, we hope you enjoy our service.`;
 
-  await mailTransport.sendMail(mailOptions);
-  console.log("New mail sent to: ", email);
-  return null;
+  try {
+    await mailTransport.sendMail(mailOptions);
+    console.log("New mail sent to: ", email);
+    return null;
+  } catch (error) {
+    functions.logger.error("Error sending email:", error);
+    throw error;
+  }
 }
