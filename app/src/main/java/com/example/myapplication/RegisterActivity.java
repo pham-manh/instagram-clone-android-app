@@ -80,6 +80,8 @@ public class RegisterActivity extends AppCompatActivity {
                             newUser.put("email", email);
                             newUser.put("password", password);
                             newUser.put("id", uid);
+                            newUser.put("bio","");
+                            newUser.put("imageUrl","default");
 
                             mRootRef.child("Users")
                                     .child(uid)
