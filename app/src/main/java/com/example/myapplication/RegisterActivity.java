@@ -87,12 +87,15 @@ public class RegisterActivity extends AppCompatActivity {
                                     .addOnCompleteListener(task -> {
                                                 if (task.isSuccessful()) {
                                                     Toast.makeText(RegisterActivity.this,
-                                                                    "Update the Profile for better experience", Toast.LENGTH_SHORT)
+                                                                    "Update the Profile for better experience",
+                                                                    Toast.LENGTH_SHORT)
                                                             .show();
 
-                                                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                                    Intent intent = new Intent(RegisterActivity.this,
+                                                            MainActivity.class);
 
-                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                                            | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                     startActivity(intent);
                                                     finish();
                                                 }
