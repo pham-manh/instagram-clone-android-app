@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import java.lang.annotation.Annotation;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -38,10 +38,10 @@ public class StartActivity extends AppCompatActivity {
 
         iconImage.setAnimation(animation);
 
-        btnLogin.setOnClickListener(view -> startActivity(new Intent(StartActivity.this,LoginActivity.class)
+        btnLogin.setOnClickListener(view -> startActivity(new Intent(StartActivity.this, LoginActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP)));
 
-        btnRegister.setOnClickListener(view -> startActivity(new Intent(StartActivity.this,RegisterActivity.class)
+        btnRegister.setOnClickListener(view -> startActivity(new Intent(StartActivity.this, RegisterActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP)));
     }
 
@@ -63,6 +63,15 @@ public class StartActivity extends AppCompatActivity {
         @Override
         public void onAnimationRepeat(Animation animation) {
 
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            startActivity(new Intent(StartActivity.this, MainActivity.class));
         }
     }
 }
