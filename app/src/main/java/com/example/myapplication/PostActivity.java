@@ -1,10 +1,14 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hendraanggrian.appcompat.socialview.widget.SocialAutoCompleteTextView;
@@ -31,5 +35,22 @@ public class PostActivity extends AppCompatActivity {
             startActivity(new Intent(PostActivity.this, MainActivity.class));
             finish();
         });
+
+        imgAdded.setOnClickListener(view -> pickImg());
     }
+
+    private ActivityResultLauncher<Intent> takeImage =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+                        if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                            Uri uri = result.getData().getData();
+                            imgAdded.setImageURI(uri);
+                        }
+                    });
+
+    private void pickImg() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        takeImage.launch(intent);
+    }
+
 }

@@ -3,9 +3,7 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -14,7 +12,6 @@ import com.example.myapplication.fragment.NotificationFragment;
 import com.example.myapplication.fragment.ProfileFragment;
 import com.example.myapplication.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     private Fragment selectorFragment;
@@ -25,34 +22,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                item.setChecked(true);
-                Log.i("Click", String.valueOf(item.getItemId()));
-                if (item.getItemId() == R.id.nav_home) {
-                    selectorFragment = new HomeFragment();
-                } else if (item.getItemId() == R.id.nav_search) {
-                    selectorFragment = new SearchFragment();
-                } else if (item.getItemId() == R.id.nav_profile) {
-                    selectorFragment = new ProfileFragment();
-                } else if (item.getItemId() == R.id.nav_heart) {
-                    selectorFragment = new NotificationFragment();
-                } else if (item.getItemId() == R.id.nav_add) {
-                    startActivity(new Intent(MainActivity.this, PostActivity.class));
-                } else {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, new HomeFragment())
-                            .commit();
-                }
-                if (selectorFragment != null) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, selectorFragment)
-                            .commit();
-                }
-                return true;
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            item.setChecked(true);
+            Log.i("Click", String.valueOf(item.getItemId()));
+            if (item.getItemId() == R.id.nav_home) {
+                selectorFragment = new HomeFragment();
+            } else if (item.getItemId() == R.id.nav_search) {
+                selectorFragment = new SearchFragment();
+            } else if (item.getItemId() == R.id.nav_profile) {
+                selectorFragment = new ProfileFragment();
+            } else if (item.getItemId() == R.id.nav_heart) {
+                selectorFragment = new NotificationFragment();
+            } else if (item.getItemId() == R.id.nav_add) {
+                startActivity(new Intent(MainActivity.this, PostActivity.class));
+            } else {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new HomeFragment())
+                        .commit();
             }
+            if (selectorFragment != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, selectorFragment)
+                        .commit();
+            }
+            return true;
         });
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new HomeFragment())
+                .commit();
     }
 }
