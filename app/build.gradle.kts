@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.myapplication"
-        minSdk = 30
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -42,7 +42,8 @@ dependencies {
     implementation("com.hendraanggrian.appcompat:socialview:0.1")
     implementation("com.hendraanggrian.appcompat:socialview-autocomplete:0.1")
     //ImageCrop
-    implementation("com.vanniktech:android-image-cropper:4.5.0")
+//    implementation("com.vanniktech:android-image-cropper:4.5.0")
+    api ("com.theartofdev.edmodo:android-image-cropper:2.8.+")
     //dependencies
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-analytics")
