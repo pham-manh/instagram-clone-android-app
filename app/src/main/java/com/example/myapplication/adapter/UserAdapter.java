@@ -32,10 +32,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private boolean isFragment;
     private FirebaseUser fireBaseUser;
 
-    public UserAdapter(Context mContext, List<User> mUsers, FirebaseUser fireBaseUser) {
+    public UserAdapter(Context mContext, List<User> mUsers, boolean isFragment) {
         this.mContext = mContext;
         this.mUsers = mUsers;
-        this.fireBaseUser = fireBaseUser;
+        this.isFragment = isFragment;
     }
 
     @NonNull
