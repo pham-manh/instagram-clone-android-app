@@ -130,7 +130,7 @@ public class PostActivity extends AppCompatActivity {
                         map.clear();
                         map.put("tag", tag.toLowerCase());
                         map.put("postId", postId);
-                        mHashTagRef.child(tag.toLowerCase()).setValue(map);
+                        mHashTagRef.child(tag.toLowerCase()).child(postId).setValue(map);
                     }
                 }
                 startActivity(new Intent(PostActivity.this, MainActivity.class));
