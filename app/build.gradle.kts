@@ -42,9 +42,11 @@ dependencies {
     implementation("com.hendraanggrian.appcompat:socialview:0.1")
     implementation("com.hendraanggrian.appcompat:socialview-autocomplete:0.1")
     //ImageCrop
-//    implementation("com.vanniktech:android-image-cropper:4.5.0")
-    api ("com.theartofdev.edmodo:android-image-cropper:2.8.+")
-    //dependencies
+    api("com.theartofdev.edmodo:android-image-cropper:2.8.+")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+    //Image downloading and caching library for Android
+    implementation("com.squareup.picasso:picasso:2.8")
+    //Cycle Image View
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
