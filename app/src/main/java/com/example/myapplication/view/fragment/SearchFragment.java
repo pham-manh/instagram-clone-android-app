@@ -1,4 +1,4 @@
-package com.example.myapplication.fragment;
+package com.example.myapplication.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.UserAdapter;
-import com.example.myapplication.model.User;
+import com.example.myapplication.data.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

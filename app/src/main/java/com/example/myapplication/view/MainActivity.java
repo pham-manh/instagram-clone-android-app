@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +7,11 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.fragment.HomeFragment;
-import com.example.myapplication.fragment.NotificationFragment;
-import com.example.myapplication.fragment.ProfileFragment;
-import com.example.myapplication.fragment.SearchFragment;
+import com.example.myapplication.R;
+import com.example.myapplication.view.fragment.HomeFragment;
+import com.example.myapplication.view.fragment.NotificationFragment;
+import com.example.myapplication.view.fragment.ProfileFragment;
+import com.example.myapplication.view.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
