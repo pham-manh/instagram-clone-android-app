@@ -25,12 +25,13 @@ android {
             )
         }
     }
-    buildFeatures {
-        dataBinding = true
-    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        enable = true
     }
 }
 
@@ -39,7 +40,6 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.databinding:databinding-compiler:8.2.1")
     //social view dependencies
     implementation("com.hendraanggrian.appcompat:socialview:0.1")
     implementation("com.hendraanggrian.appcompat:socialview-autocomplete:0.1")

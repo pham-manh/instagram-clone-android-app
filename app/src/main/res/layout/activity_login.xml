@@ -1,67 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="12dp"
-    tools:context=".LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="loginModel"
+            type="com.example.myapplication.viewmodel.LoginViewModel" />
+    </data>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:contentDescription="Logo App"
-        app:srcCompat="@drawable/logo"
-        tools:ignore="HardcodedText" />
-
-
-    <EditText
-        android:id="@+id/edit_text_email"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/edit_text_background"
-        android:inputType="textEmailAddress"
-        android:hint="Email"
-        android:padding="10dp"
-        app:backgroundTint="@null"
-        tools:ignore="Autofill, HardcodedText" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="13dp">
 
-    <EditText
-        android:id="@+id/edit_text_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/edit_text_background"
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:padding="10dp"
-        app:backgroundTint="@null"
-        tools:ignore="Autofill, HardcodedText" />
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_background"
-        android:text="Login"
-        android:textColor="@color/black"
-        app:backgroundTint="@null"
-        tools:ignore="HardcodedText" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
+            android:contentDescription="Logo App"
+            app:srcCompat="@drawable/logo"
+            tools:ignore="HardcodedText" />
 
-    <TextView
-        android:id="@+id/regiser_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:padding="10dp"
-        android:text="New to Instagram?  Register"
-        android:textAlignment="center"
-        tools:ignore="HardcodedText" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/edit_text_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:text="@={loginModel.email}"
+            android:padding="11dp"
+            app:backgroundTint="@null"
+            tools:ignore="Autofill, HardcodedText" />
+
+        <EditText
+            android:id="@+id/edit_text_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Password"
+            android:text="@={loginModel.password}"
+            android:inputType="textPassword"
+            android:padding="11dp"
+            app:backgroundTint="@null"
+            tools:ignore="Autofill, HardcodedText" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/button_background"
+            android:text="Login"
+            android:onClick="@{()->loginModel.loginUser()}"
+            android:textColor="@color/black"
+            app:backgroundTint="@null"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/regiser_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:padding="11dp"
+            android:text="New to Instagram?  Register"
+            android:textAlignment="center"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+</layout>

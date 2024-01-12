@@ -36,7 +36,6 @@ public class StartActivity extends AppCompatActivity {
         animation.setDuration(1500);
         animation.setFillAfter(false);
         animation.setAnimationListener(new MyAnimationListener());
-
         iconImage.setAnimation(animation);
 
         btnLogin.setOnClickListener(view -> startActivity(new Intent(StartActivity.this, LoginActivity.class)
@@ -70,7 +69,6 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             startActivity(new Intent(StartActivity.this, MainActivity.class));
         }

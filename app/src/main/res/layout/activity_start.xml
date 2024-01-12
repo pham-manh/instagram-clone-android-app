@@ -54,8 +54,6 @@
             android:text="Register"
             android:textColor="@color/black"
             tools:ignore="HardcodedText" />
-
-
     </LinearLayout>
 
 
