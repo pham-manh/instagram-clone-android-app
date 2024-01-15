@@ -19,19 +19,13 @@ import com.example.myapplication.viewmodel.PostViewModel;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 public class PostActivity extends AppCompatActivity {
-
-    //    private ImageView closeBtn;
-//    private ImageView imgAdded;
-//    private TextView postBtn;
-///    private String imageUrl;
-//    private SocialAutoCompleteTextView description;
+    private ActivityPostBinding activityPostBinding;
     private final ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
             registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
                 if (uri != null) {
                     CropImage.activity(uri).start(this);
                 }
             });
-    private ActivityPostBinding activityPostBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,40 +49,24 @@ public class PostActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-
-
-//        closeBtn = findViewById(R.id.close);
-//        postBtn = findViewById(R.id.post);
-//        description = findViewById(R.id.description);
-//
-//        closeBtn.setOnClickListener(view -> {
-//            startActivity(new Intent(PostActivity.this, MainActivity.class));
-//            finish();
-//        });
-//        imgAdded.setOnClickListener(view -> pickImg());
-//        postBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.i("Post", "Post is Click");
-//                uploadPost();
-//            }
-//        });
     }
 
-    //
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-                activityPostBinding.getPostViewModel().setImageURI(PostActivity.this,result.getUri());
+                activityPostBinding.getPostViewModel()
+                        .updateImgUri(result.getUri());
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 cropImageErrorMessage();
             }
         }
     }
-
+    private void cropImageErrorMessage() {
+        Toast.makeText(this, "Fail to upload Image!", Toast.LENGTH_SHORT).show();
+    }
     //
 //    private void uploadPost() {
 //        if (imageUri != null) {
@@ -153,14 +131,4 @@ public class PostActivity extends AppCompatActivity {
 //                        this.getContentResolver().getType(imageUri)
 //                );
 //    }
-//
-//    private void pickImg() {
-//        pickMedia.launch(new PickVisualMediaRequest.Builder()
-//                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
-//                .build());
-//    }
-    private void cropImageErrorMessage() {
-        Toast.makeText(this, "Fail to upload Image!", Toast.LENGTH_SHORT).show();
-    }
-
 }

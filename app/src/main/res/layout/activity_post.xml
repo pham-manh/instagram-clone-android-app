@@ -69,7 +69,7 @@
                 android:layout_gravity="center"
                 android:onClick="@{()->postViewModel.pickImg()}"
                 android:scaleType="centerInside"
-                android:src="@mipmap/ic_launcher"  />
+                android:src="@{postViewModel.imageUri}" />
 
             <com.hendraanggrian.appcompat.socialview.widget.SocialAutoCompleteTextView
                 android:id="@+id/description"
