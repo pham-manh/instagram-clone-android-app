@@ -43,6 +43,9 @@ dependencies {
     //social view dependencies
     implementation("com.hendraanggrian.appcompat:socialview:0.1")
     implementation("com.hendraanggrian.appcompat:socialview-autocomplete:0.1")
+    //lifecycle
+    implementation("androidx.lifecycle:lifecycle-extensions:2.1.0")
+
     //ImageCrop
     api("com.theartofdev.edmodo:android-image-cropper:2.8.+")
     implementation("de.hdodenhof:circleimageview:3.1.0")

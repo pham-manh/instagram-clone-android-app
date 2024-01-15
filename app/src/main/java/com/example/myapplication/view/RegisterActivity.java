@@ -11,8 +11,8 @@ import androidx.lifecycle.Observer;
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.ActivityRegisterBinding;
 import com.example.myapplication.viewmodel.RegisterViewModel;
-import com.example.myapplication.viewmodel.utils.Activity;
-import com.example.myapplication.viewmodel.utils.ActivityUtils;
+import com.example.myapplication.utils.Activity;
+import com.example.myapplication.utils.ActivityUtils;
 
 public class RegisterActivity extends AppCompatActivity {
     @Override

@@ -11,8 +11,8 @@ import androidx.lifecycle.Observer;
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.ActivityLoginBinding;
 import com.example.myapplication.viewmodel.LoginViewModel;
-import com.example.myapplication.viewmodel.utils.Activity;
-import com.example.myapplication.viewmodel.utils.ActivityUtils;
+import com.example.myapplication.utils.Activity;
+import com.example.myapplication.utils.ActivityUtils;
 
 public class LoginActivity extends AppCompatActivity {
     @Override

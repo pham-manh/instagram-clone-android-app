@@ -1,4 +1,4 @@
-package com.example.myapplication.viewmodel.utils;
+package com.example.myapplication.utils;
 
 public enum Activity {
     STAR_ACTIVITY,

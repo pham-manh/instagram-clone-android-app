@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.data.service.AuthService;
 import com.example.myapplication.data.service.AuthService.OnAuthServiceCompleteListener;
-import com.example.myapplication.viewmodel.utils.Activity;
+import com.example.myapplication.utils.Activity;
 
 public class RegisterViewModel extends BaseObservable {
     private String username, name, email, password;

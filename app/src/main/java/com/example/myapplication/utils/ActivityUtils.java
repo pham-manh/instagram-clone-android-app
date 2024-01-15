@@ -1,4 +1,4 @@
-package com.example.myapplication.viewmodel.utils;
+package com.example.myapplication.utils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
