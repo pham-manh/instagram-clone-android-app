@@ -7,12 +7,14 @@ import androidx.databinding.Bindable;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.data.service.AuthService;
-import com.example.myapplication.data.service.AuthService.OnCompleteListener;
+import com.example.myapplication.data.service.AuthService.OnAuthServiceCompleteListener;
+import com.example.myapplication.viewmodel.utils.Activity;
 
 public class LoginViewModel extends BaseObservable {
     private String email, password;
-    public MutableLiveData<String> loginMessages = new MutableLiveData<>();
-    public MutableLiveData<Boolean> loginStatus = new MutableLiveData<>(false);
+    public MutableLiveData<String> viewMessage = new MutableLiveData<>();
+    public MutableLiveData<Activity> activityActionLiveData = new MutableLiveData<>();
+
 
     @Bindable
     public String getEmail() {
@@ -32,28 +34,32 @@ public class LoginViewModel extends BaseObservable {
         this.password = password;
     }
 
-    public MutableLiveData<String> getLoginMessages() {
-        return loginMessages;
+    public MutableLiveData<String> getViewMessage() {
+        return viewMessage;
     }
 
-    public MutableLiveData<Boolean> getLoginStatus() {
-        return loginStatus;
+    public MutableLiveData<Activity> getActivityActionLiveData() {
+        return activityActionLiveData;
+    }
+    public void toRegisterUser(){
+        activityActionLiveData.setValue(Activity.REGISTER_ACTIVITY);
     }
 
     public void loginUser() {
         AuthService authService = new AuthService();
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            loginMessages.setValue("Empty credentials!!");
+            viewMessage.setValue("Empty credentials!!");
         } else {
-            authService.loginUser(email, password, new OnCompleteListener() {
+            authService.loginUser(email, password, new OnAuthServiceCompleteListener() {
                 @Override
-                public void onSuccess() {
-                    loginStatus.setValue(true);
+                public void onSuccess(String successMessage) {
+                    activityActionLiveData.setValue(Activity.MAIN_ACTIVITY);
+                    viewMessage.setValue(successMessage);
                 }
 
                 @Override
                 public void onFailure(String errorMessage) {
-                    loginMessages.setValue(errorMessage);
+                    viewMessage.setValue(errorMessage);
                 }
             });
         }

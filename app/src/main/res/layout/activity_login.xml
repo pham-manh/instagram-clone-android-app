@@ -71,6 +71,7 @@
             android:padding="11dp"
             android:text="New to Instagram?  Register"
             android:textAlignment="center"
+            android:onClick="@{()->loginModel.toRegisterUser()}"
             tools:ignore="HardcodedText" />
 
     </LinearLayout>
