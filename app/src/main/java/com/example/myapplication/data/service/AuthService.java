@@ -4,11 +4,19 @@ import android.text.TextUtils;
 import android.util.Patterns;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 public class AuthService {
 
     static FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private boolean isValid;
+    private final DatabaseReference mRootRef = FirebaseDatabase
+            .getInstance("https://instagram-clone-784ff-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference();
+
     private String msg;
 
     public AuthService() {
@@ -43,27 +51,70 @@ public class AuthService {
         return true;
     }
 
-    public void loginUser(String email, String password, OnCompleteListener onCompleteListener) {
+    public void loginUser(String email, String password, OnAuthServiceCompleteListener onAuthServiceCompleteListener) {
         if (isValidEmailPassword(email, password)) {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(
                             authTask -> {
                                 if (authTask.isSuccessful()) {
-                                    onCompleteListener.onSuccess();
+                                    onAuthServiceCompleteListener.onSuccess("Login Success !!");
                                 }
                             })
                     .addOnFailureListener(failTask ->
                             {
-                                onCompleteListener.onFailure(failTask.getMessage());
+                                onAuthServiceCompleteListener.onFailure(failTask.getMessage());
                             }
                     );
         } else {
-            onCompleteListener.onFailure(this.getMsg());
+            onAuthServiceCompleteListener.onFailure(this.getMsg());
         }
     }
 
-    public interface OnCompleteListener {
-        void onSuccess();
+    public void registerUser(String username, String name, String email, String password,
+                             OnAuthServiceCompleteListener onAuthServiceCompleteListener)
+            throws NullPointerException {
+        if (isValidEmailPassword(email, password)) {
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnSuccessListener(
+                            authResult -> {
+                                String uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+                                HashMap<String, Object> newUser = new HashMap<>();
+                                newUser.put("username", username);
+                                newUser.put("name", name);
+                                newUser.put("email", email);
+                                newUser.put("password", password);
+                                newUser.put("id", uid);
+                                newUser.put("bio", "");
+                                newUser.put("imageUrl", "");
+
+                                mRootRef.child("Users")
+                                        .child(uid)
+                                        .setValue(newUser)
+                                        .addOnCompleteListener(task -> {
+                                                    if (task.isSuccessful()) {
+                                                        onAuthServiceCompleteListener.onSuccess(
+                                                                "Update the Profile for better experience"
+                                                        );
+                                                    }
+                                                }
+                                        );
+                            })
+                    .addOnFailureListener(exception -> {
+                        onAuthServiceCompleteListener.onFailure(exception.getMessage());
+                    });
+        } else {
+            onAuthServiceCompleteListener.onFailure(this.getMsg());
+        }
+
+    }
+
+    public static void signOutCurrentUser() {
+        mAuth.signOut();
+    }
+
+    public interface OnAuthServiceCompleteListener {
+        void onSuccess(String successMessage);
 
         void onFailure(String errorMessage);
     }

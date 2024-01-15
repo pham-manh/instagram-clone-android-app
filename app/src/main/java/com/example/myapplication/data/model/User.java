@@ -1,23 +1,45 @@
 package com.example.myapplication.data.model;
 
 public class User {
+    private String id;
+    private String username;
     private String name;
     private String email;
-    private String username;
+    private String password;
     private String bio;
     private String imageUrl;
-    private String id;
 
-    public User(String name, String email, String username, String bio, String imageUrl, String id) {
+    public User(String id, String username, String name, String email, String password, String bio, String imageUrl) {
+        this.id = id;
+        this.username = username;
         this.name = name;
         this.email = email;
-        this.username = username;
+        this.password = password;
         this.bio = bio;
         this.imageUrl = imageUrl;
+    }
+
+    public User(String username, String name, String email, String password) {
+        this.username = username;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
 
-    public User() {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
@@ -36,12 +58,12 @@ public class User {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getBio() {
@@ -58,13 +80,5 @@ public class User {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }
