@@ -4,19 +4,13 @@ import android.text.TextUtils;
 import android.util.Patterns;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Objects;
 
 public class AuthService {
 
-    static FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private final DatabaseReference mRootRef = FirebaseDatabase
-            .getInstance("https://instagram-clone-784ff-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference();
-
+    private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private String msg;
 
     public AuthService() {
@@ -51,7 +45,8 @@ public class AuthService {
         return true;
     }
 
-    public void loginUser(String email, String password, MyOnCompleteListener myOnCompleteListener) {
+    public void loginUser(String email, String password,
+                          MyOnCompleteListener myOnCompleteListener) {
         if (isValidEmailPassword(email, password)) {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(
@@ -61,9 +56,7 @@ public class AuthService {
                                 }
                             })
                     .addOnFailureListener(failTask ->
-                            {
-                                myOnCompleteListener.onFailure(failTask.getMessage());
-                            }
+                            myOnCompleteListener.onFailure(failTask.getMessage())
                     );
         } else {
             myOnCompleteListener.onFailure(this.getMsg());
@@ -88,7 +81,10 @@ public class AuthService {
                                 newUser.put("bio", "");
                                 newUser.put("imageUrl", "");
 
-                                mRootRef.child("Users")
+                                StorageService
+                                        .getRealTimeDatabase()
+                                        .getReference()
+                                        .child("Users")
                                         .child(uid)
                                         .setValue(newUser)
                                         .addOnCompleteListener(task -> {
@@ -106,12 +102,10 @@ public class AuthService {
         } else {
             myOnCompleteListener.onFailure(this.getMsg());
         }
-
     }
 
     public static void signOutCurrentUser() {
         mAuth.signOut();
     }
-
 }
 
