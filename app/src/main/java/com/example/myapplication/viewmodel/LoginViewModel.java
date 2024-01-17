@@ -7,7 +7,7 @@ import androidx.databinding.Bindable;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.data.service.AuthService;
-import com.example.myapplication.data.service.AuthService.OnAuthServiceCompleteListener;
+import com.example.myapplication.data.service.MyOnCompleteListener;
 import com.example.myapplication.utils.Activity;
 
 public class LoginViewModel extends BaseObservable {
@@ -50,7 +50,7 @@ public class LoginViewModel extends BaseObservable {
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             viewMessage.setValue("Empty credentials!!");
         } else {
-            authService.loginUser(email, password, new OnAuthServiceCompleteListener() {
+            authService.loginUser(email, password, new MyOnCompleteListener() {
                 @Override
                 public void onSuccess(String successMessage) {
                     activityActionLiveData.setValue(Activity.MAIN_ACTIVITY);

@@ -7,7 +7,7 @@ import androidx.databinding.Bindable;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.data.service.AuthService;
-import com.example.myapplication.data.service.AuthService.OnAuthServiceCompleteListener;
+import com.example.myapplication.data.service.MyOnCompleteListener;
 import com.example.myapplication.utils.Activity;
 
 public class RegisterViewModel extends BaseObservable {
@@ -72,7 +72,7 @@ public class RegisterViewModel extends BaseObservable {
             viewMessage.setValue("Empty credentials!!");
         } else {
             authService.registerUser(username, name, email, password,
-                    new OnAuthServiceCompleteListener() {
+                    new MyOnCompleteListener() {
                         @Override
                         public void onSuccess(String successMessage) {
                             activityMutableLiveData.setValue(Activity.MAIN_ACTIVITY);
