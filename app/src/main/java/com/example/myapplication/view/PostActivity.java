@@ -35,7 +35,7 @@ public class PostActivity extends AppCompatActivity {
         SocialAutoCompleteTextView description = findViewById(R.id.description);
 
         activityPostBinding = DataBindingUtil.setContentView(this, R.layout.activity_post);
-        activityPostBinding.setPostViewModel(new PostViewModel(pickMedia));
+        activityPostBinding.setPostViewModel(new PostViewModel(getContentResolver(), pickMedia));
 
         activityPostBinding.getPostViewModel()
                 .setDescription(description);
@@ -53,6 +53,14 @@ public class PostActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+        activityPostBinding.getPostViewModel()
+                .getToastMessage()
+                .observe(this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String message) {
+                        showToast(message);
+                    }
+                });
     }
 
     @Override
@@ -64,19 +72,12 @@ public class PostActivity extends AppCompatActivity {
                 activityPostBinding.getPostViewModel()
                         .updateImgUri(result.getUri());
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                cropImageErrorMessage();
+                showToast("Fail to upload Image!");
             }
         }
     }
 
-    private void cropImageErrorMessage() {
-        Toast.makeText(this, "Fail to upload Image!", Toast.LENGTH_SHORT).show();
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-
-//    private String getFileExtension(Uri imageUri) {
-//        return MimeTypeMap.getSingleton()
-//                .getExtensionFromMimeType(
-//                        this.getContentResolver().getType(imageUri)
-//                );
-//        }
 }

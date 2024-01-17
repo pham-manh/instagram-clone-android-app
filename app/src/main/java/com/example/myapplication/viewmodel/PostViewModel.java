@@ -1,7 +1,8 @@
 package com.example.myapplication.viewmodel;
 
+import android.content.ContentResolver;
 import android.net.Uri;
-import android.util.Log;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -10,10 +11,13 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.BR;
 import com.example.myapplication.R;
+import com.example.myapplication.data.service.MyOnCompleteListener;
+import com.example.myapplication.data.service.StorageService;
 import com.example.myapplication.utils.Activity;
 import com.hendraanggrian.appcompat.socialview.widget.SocialAutoCompleteTextView;
 
@@ -21,17 +25,27 @@ public class PostViewModel extends BaseObservable {
     public static final int IMAGE_VIEW_SRC_DEFAULT = R.mipmap.ic_launcher;
 
     private SocialAutoCompleteTextView description;
-
-    public void setDescription(SocialAutoCompleteTextView description) {
-        this.description = description;
-    }
-
+    private final ContentResolver contentResolver;
+    private MutableLiveData<String> toastMessage = new MutableLiveData<>();
     public MutableLiveData<Activity> activityMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<Uri> imageUri = new MutableLiveData<>();
     private final ActivityResultLauncher<PickVisualMediaRequest> pickVisualMedia;
 
-    public PostViewModel(ActivityResultLauncher<PickVisualMediaRequest> pickMedia) {
+    public PostViewModel(ContentResolver contentResolver, ActivityResultLauncher<PickVisualMediaRequest> pickMedia) {
+        this.contentResolver = contentResolver;
         pickVisualMedia = pickMedia;
+    }
+
+    public LiveData<String> getToastMessage() {
+        return toastMessage;
+    }
+
+    private void showToast(String message) {
+        toastMessage.setValue(message);
+    }
+
+    public void setDescription(SocialAutoCompleteTextView description) {
+        this.description = description;
     }
 
     @Bindable
@@ -72,75 +86,31 @@ public class PostViewModel extends BaseObservable {
                 .build());
     }
 
-    public void closePostActivity() {
-        activityMutableLiveData.setValue(Activity.MAIN_ACTIVITY);
+    private String getFileExtension(Uri imageUri) {
+        return MimeTypeMap.getSingleton()
+                .getExtensionFromMimeType(
+                        contentResolver.getType(imageUri)
+                );
     }
 
     public void uploadPost() {
-        Log.i("uploadPost", getDescription());
+        Uri imgUri = this.getImageUri().getValue();
+        String fileExtension = getFileExtension( this.getImageUri().getValue());
+        StorageService storageService = new StorageService();
+        storageService.uploadPost(imgUri, description, fileExtension, new MyOnCompleteListener() {
+            @Override
+            public void onSuccess(String successMessage) {
+                activityMutableLiveData.setValue(Activity.MAIN_ACTIVITY);
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                showToast(errorMessage);
+            }
+        });
     }
 
-//    private void uploadPost() {
-//        if (imageUri != null) {
-//            Log.i("Post", "Uploading");
-//            StorageReference filePart = FirebaseStorage.getInstance("gs://instagram-clone-784ff.appspot.com")
-//                    .getReference("Posts")
-//                    .child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
-//            StorageTask<UploadTask.TaskSnapshot> storageTask = filePart.putFile(imageUri);
-//            storageTask.continueWithTask(new Continuation() {
-//                @Override
-//                public Object then(@NonNull Task task) throws Exception {
-//                    if (!task.isSuccessful()) {
-//                        throw Objects.requireNonNull(task.getException());
-//                    }
-//                    return filePart.getDownloadUrl();
-//                }
-//            }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
-//                Uri downloadURL = task.getResult();
-//                imageUrl = downloadURL.toString();
-//
-//                DatabaseReference ref = FirebaseDatabase
-//                        .getInstance("https://instagram-clone-784ff-default-rtdb.asia-southeast1.firebasedatabase.app/")
-//                        .getReference("Posts");
-//                String postId = ref.push().getKey();
-//
-//                HashMap<String, Object> map = new HashMap<>();
-//                map.put("postId", postId);
-//                map.put("imageUrl", imageUrl);
-//                map.put("description", description.getText().toString());
-//                map.put("publisher", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
-//
-//                ref.child(postId).setValue(map);
-//
-//                DatabaseReference mHashTagRef = FirebaseDatabase
-//                        .getInstance("https://instagram-clone-784ff-default-rtdb.asia-southeast1.firebasedatabase.app/")
-//                        .getReference()
-//                        .child("HashTags");
-//                List<String> hashTags = description.getHashtags();
-//                if (!hashTags.isEmpty()) {
-//                    for (String tag : hashTags
-//                    ) {
-//                        map.clear();
-//                        map.put("tag", tag.toLowerCase());
-//                        map.put("postId", postId);
-//                        mHashTagRef.child(tag.toLowerCase()).child(postId).setValue(map);
-//                    }
-//                }
-//                startActivity(new Intent(PostActivity.this, MainActivity.class));
-//                finish();
-//            }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception e) {
-//                    Toast.makeText(PostActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        }
-//    }
-//
-//        private String getFileExtension(Uri imageUri) {
-//        return MimeTypeMap.getSingleton()
-//                .getExtensionFromMimeType(
-//                        this.getContentResolver().getType(imageUri)
-//                );
-//        }
+    public void closePostActivity() {
+        activityMutableLiveData.setValue(Activity.MAIN_ACTIVITY);
+    }
 }
