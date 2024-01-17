@@ -51,27 +51,27 @@ public class AuthService {
         return true;
     }
 
-    public void loginUser(String email, String password, OnAuthServiceCompleteListener onAuthServiceCompleteListener) {
+    public void loginUser(String email, String password, MyOnCompleteListener myOnCompleteListener) {
         if (isValidEmailPassword(email, password)) {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(
                             authTask -> {
                                 if (authTask.isSuccessful()) {
-                                    onAuthServiceCompleteListener.onSuccess("Login Success !!");
+                                    myOnCompleteListener.onSuccess("Login Success !!");
                                 }
                             })
                     .addOnFailureListener(failTask ->
                             {
-                                onAuthServiceCompleteListener.onFailure(failTask.getMessage());
+                                myOnCompleteListener.onFailure(failTask.getMessage());
                             }
                     );
         } else {
-            onAuthServiceCompleteListener.onFailure(this.getMsg());
+            myOnCompleteListener.onFailure(this.getMsg());
         }
     }
 
     public void registerUser(String username, String name, String email, String password,
-                             OnAuthServiceCompleteListener onAuthServiceCompleteListener)
+                             MyOnCompleteListener myOnCompleteListener)
             throws NullPointerException {
         if (isValidEmailPassword(email, password)) {
             mAuth.createUserWithEmailAndPassword(email, password)
@@ -93,7 +93,7 @@ public class AuthService {
                                         .setValue(newUser)
                                         .addOnCompleteListener(task -> {
                                                     if (task.isSuccessful()) {
-                                                        onAuthServiceCompleteListener.onSuccess(
+                                                        myOnCompleteListener.onSuccess(
                                                                 "Update the Profile for better experience"
                                                         );
                                                     }
@@ -101,10 +101,10 @@ public class AuthService {
                                         );
                             })
                     .addOnFailureListener(exception -> {
-                        onAuthServiceCompleteListener.onFailure(exception.getMessage());
+                        myOnCompleteListener.onFailure(exception.getMessage());
                     });
         } else {
-            onAuthServiceCompleteListener.onFailure(this.getMsg());
+            myOnCompleteListener.onFailure(this.getMsg());
         }
 
     }
@@ -113,10 +113,5 @@ public class AuthService {
         mAuth.signOut();
     }
 
-    public interface OnAuthServiceCompleteListener {
-        void onSuccess(String successMessage);
-
-        void onFailure(String errorMessage);
-    }
 }
 
