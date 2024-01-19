@@ -40,11 +40,11 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+
     //social view dependencies
     implementation("com.hendraanggrian.appcompat:socialview:0.1")
     implementation("com.hendraanggrian.appcompat:socialview-autocomplete:0.1")
-    //lifecycle
-    implementation("androidx.lifecycle:lifecycle-extensions:2.1.0")
 
     //ImageCrop
     api("com.theartofdev.edmodo:android-image-cropper:2.8.+")

@@ -5,26 +5,11 @@ public class User {
     private String username;
     private String name;
     private String email;
-    private String password;
     private String bio;
     private String imageUrl;
+    private String password;
+    public User(){}
 
-    public User(String id, String username, String name, String email, String password, String bio, String imageUrl) {
-        this.id = id;
-        this.username = username;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.bio = bio;
-        this.imageUrl = imageUrl;
-    }
-
-    public User(String username, String name, String email, String password) {
-        this.username = username;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
 
     public String getId() {
         return id;
@@ -58,14 +43,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getBio() {
         return bio;
     }
@@ -80,5 +57,17 @@ public class User {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", bio='" + bio + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
     }
 }

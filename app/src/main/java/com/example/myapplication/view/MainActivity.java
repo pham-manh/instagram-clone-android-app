@@ -1,5 +1,7 @@
 package com.example.myapplication.view;
 
+import static com.example.myapplication.utils.Activity.POST_ACTIVITY;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.utils.ActivityUtils;
 import com.example.myapplication.view.fragment.HomeFragment;
 import com.example.myapplication.view.fragment.NotificationFragment;
 import com.example.myapplication.view.fragment.ProfileFragment;
@@ -35,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.nav_heart) {
                 selectorFragment = new NotificationFragment();
             } else if (item.getItemId() == R.id.nav_add) {
-                startActivity(new Intent(MainActivity.this, PostActivity.class));
+                startActivity(new Intent(this,
+                        ActivityUtils.getActivityClass(POST_ACTIVITY)));
             } else {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, new HomeFragment())
