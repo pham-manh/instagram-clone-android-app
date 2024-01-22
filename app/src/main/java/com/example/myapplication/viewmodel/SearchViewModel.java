@@ -53,7 +53,6 @@ public class SearchViewModel extends BaseObservable {
                     userSearchList.add(user);
                 }
                 setUsers(userSearchList);
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
