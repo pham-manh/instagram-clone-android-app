@@ -1,4 +1,4 @@
-package com.example.myapplication.data.service;
+package com.example.myapplication.data.repository.datasource.remote;
 
 import android.content.ContentResolver;
 import android.net.Uri;

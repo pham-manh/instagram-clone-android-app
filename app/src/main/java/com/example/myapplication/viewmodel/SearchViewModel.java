@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.viewmodel;
+package com.example.myapplication.viewmodel;
 
 import android.annotation.SuppressLint;
 
@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.myapplication.data.model.User;
+import com.example.myapplication.data.model.entity.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;

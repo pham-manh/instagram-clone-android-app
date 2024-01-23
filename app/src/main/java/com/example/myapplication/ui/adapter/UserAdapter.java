@@ -1,4 +1,4 @@
-package com.example.myapplication.adapter;
+package com.example.myapplication.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.example.myapplication.BR;
 import com.example.myapplication.R;
-import com.example.myapplication.adapter.UserAdapter.UserViewHolder;
-import com.example.myapplication.data.model.User;
+import com.example.myapplication.ui.adapter.UserAdapter.UserViewHolder;
+import com.example.myapplication.data.model.entity.User;
 import com.example.myapplication.databinding.UserItemBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

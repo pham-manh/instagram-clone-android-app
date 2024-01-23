@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.viewmodel;
+package com.example.myapplication.viewmodel;
 
 import android.content.ContentResolver;
 import android.net.Uri;
@@ -16,8 +16,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.BR;
 import com.example.myapplication.R;
-import com.example.myapplication.data.service.MyOnCompleteListener;
-import com.example.myapplication.data.service.StorageService;
+import com.example.myapplication.data.repository.datasource.remote.MyOnCompleteListener;
+import com.example.myapplication.data.repository.datasource.remote.StorageService;
 import com.example.myapplication.utils.Activity;
 import com.hendraanggrian.appcompat.socialview.widget.SocialAutoCompleteTextView;
 

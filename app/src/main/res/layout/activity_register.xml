@@ -5,7 +5,7 @@
     <data>
         <variable
             name="registerViewModel"
-            type="com.example.myapplication.ui.viewmodel.RegisterViewModel" />
+            type="com.example.myapplication.viewmodel.RegisterViewModel" />
     </data>
 
     <LinearLayout

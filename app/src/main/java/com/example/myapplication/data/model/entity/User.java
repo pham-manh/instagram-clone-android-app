@@ -1,15 +1,40 @@
-package com.example.myapplication.data.model;
+package com.example.myapplication.data.model.entity;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "user")
 public class User {
+    @PrimaryKey
+    @NonNull
     private String id;
+    @ColumnInfo(name = "user_name")
     private String username;
+    @ColumnInfo(name = "name")
     private String name;
+    @ColumnInfo(name = "email")
     private String email;
+    @ColumnInfo(name = "bio")
     private String bio;
+    @ColumnInfo(name = "image_url")
     private String imageUrl;
+    @ColumnInfo(name = "password")
     private String password;
-    public User(){}
 
+    public User() {
+    }
+
+    public User(@NonNull String id, String username, String name, String email, String bio, String imageUrl, String password) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.email = email;
+        this.bio = bio;
+        this.imageUrl = imageUrl;
+        this.password = password;
+    }
 
     public String getId() {
         return id;
@@ -57,6 +82,14 @@ public class User {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override

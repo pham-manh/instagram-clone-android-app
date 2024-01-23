@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.viewmodel;
+package com.example.myapplication.viewmodel;
 
 import android.text.TextUtils;
 
@@ -6,8 +6,8 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.myapplication.data.service.AuthService;
-import com.example.myapplication.data.service.MyOnCompleteListener;
+import com.example.myapplication.data.repository.datasource.remote.AuthService;
+import com.example.myapplication.data.repository.datasource.remote.MyOnCompleteListener;
 import com.example.myapplication.utils.Activity;
 
 public class LoginViewModel extends BaseObservable {

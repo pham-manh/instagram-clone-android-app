@@ -5,7 +5,7 @@
 
         <variable
             name="user"
-            type="com.example.myapplication.data.model.User" />
+            type="com.example.myapplication.data.model.entity.User" />
 
     </data>
 

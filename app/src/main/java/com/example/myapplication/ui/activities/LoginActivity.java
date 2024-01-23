@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view;
+package com.example.myapplication.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.ActivityLoginBinding;
-import com.example.myapplication.ui.viewmodel.LoginViewModel;
+import com.example.myapplication.viewmodel.LoginViewModel;
 import com.example.myapplication.utils.Activity;
 import com.example.myapplication.utils.ActivityUtils;
 

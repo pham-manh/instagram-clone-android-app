@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.view;
+package com.example.myapplication.ui.activities;
 
 import static com.example.myapplication.utils.Activity.POST_ACTIVITY;
 
@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
 import com.example.myapplication.utils.ActivityUtils;
-import com.example.myapplication.ui.view.fragment.HomeFragment;
-import com.example.myapplication.ui.view.fragment.NotificationFragment;
-import com.example.myapplication.ui.view.fragment.ProfileFragment;
-import com.example.myapplication.ui.view.fragment.SearchFragment;
+import com.example.myapplication.ui.fragment.HomeFragment;
+import com.example.myapplication.ui.fragment.NotificationFragment;
+import com.example.myapplication.ui.fragment.ProfileFragment;
+import com.example.myapplication.ui.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

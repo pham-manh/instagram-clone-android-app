@@ -1,4 +1,4 @@
-package com.example.myapplication.data.service;
+package com.example.myapplication.data.repository.datasource.remote;
 
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -80,7 +80,6 @@ public class AuthService {
                                 newUser.put("id", uid);
                                 newUser.put("bio", "");
                                 newUser.put("imageUrl", "");
-
                                 StorageService
                                         .getRealTimeDatabase()
                                         .getReference()
