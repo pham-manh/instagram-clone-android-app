@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.UserAdapter;
+import com.example.myapplication.databinding.FragmentSearchBinding;
 import com.example.myapplication.ui.viewmodel.SearchViewModel;
 import com.hendraanggrian.appcompat.socialview.widget.SocialAutoCompleteTextView;
 
