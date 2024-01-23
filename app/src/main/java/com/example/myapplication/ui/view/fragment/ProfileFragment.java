@@ -1,4 +1,4 @@
-package com.example.myapplication.view.fragment;
+package com.example.myapplication.ui.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
 import com.example.myapplication.data.service.AuthService;
-import com.example.myapplication.view.StartActivity;
+import com.example.myapplication.ui.view.StartActivity;
 
 public class ProfileFragment extends Fragment {
     @Override

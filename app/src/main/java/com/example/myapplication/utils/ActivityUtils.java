@@ -2,11 +2,11 @@ package com.example.myapplication.utils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.view.LoginActivity;
-import com.example.myapplication.view.MainActivity;
-import com.example.myapplication.view.PostActivity;
-import com.example.myapplication.view.RegisterActivity;
-import com.example.myapplication.view.StartActivity;
+import com.example.myapplication.ui.view.LoginActivity;
+import com.example.myapplication.ui.view.MainActivity;
+import com.example.myapplication.ui.view.PostActivity;
+import com.example.myapplication.ui.view.RegisterActivity;
+import com.example.myapplication.ui.view.StartActivity;
 
 public class ActivityUtils {
 

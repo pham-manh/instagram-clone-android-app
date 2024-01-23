@@ -1,4 +1,4 @@
-package com.example.myapplication.view;
+package com.example.myapplication.ui.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,26 +9,27 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 
 import com.example.myapplication.R;
-import com.example.myapplication.databinding.ActivityLoginBinding;
-import com.example.myapplication.viewmodel.LoginViewModel;
+import com.example.myapplication.ui.viewmodel.RegisterViewModel;
 import com.example.myapplication.utils.Activity;
 import com.example.myapplication.utils.ActivityUtils;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        ActivityLoginBinding activityBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        activityBinding.setLoginModel(new LoginViewModel());
+        setContentView(R.layout.activity_register);
 
-        activityBinding.getLoginModel()
-                .getActivityActionLiveData()
+        ActivityRegisterBinding activityBinding =
+                DataBindingUtil.setContentView(this, R.layout.activity_register);
+        activityBinding.setRegisterViewModel(new RegisterViewModel());
+
+        activityBinding.getRegisterViewModel()
+                .getActivityMutableLiveData()
                 .observe(this, new Observer<Activity>() {
                     @Override
                     public void onChanged(Activity activity) {
                         Intent intent = new Intent(
-                                LoginActivity.this,
+                                RegisterActivity.this,
                                 ActivityUtils.getActivityClass(activity)
                         );
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -36,14 +37,14 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-
-        activityBinding.getLoginModel()
+        activityBinding.getRegisterViewModel()
                 .getViewMessage()
                 .observe(this, new Observer<String>() {
                     @Override
                     public void onChanged(String msg) {
-                        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
 }

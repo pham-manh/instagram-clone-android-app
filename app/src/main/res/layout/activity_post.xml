@@ -7,7 +7,7 @@
 
         <variable
             name="postViewModel"
-            type="com.example.myapplication.viewmodel.PostViewModel" />
+            type="com.example.myapplication.ui.viewmodel.PostViewModel" />
 
     </data>
 

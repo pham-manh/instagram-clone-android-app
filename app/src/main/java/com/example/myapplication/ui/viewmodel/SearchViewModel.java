@@ -1,7 +1,6 @@
-package com.example.myapplication.viewmodel;
+package com.example.myapplication.ui.viewmodel;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
@@ -35,8 +34,8 @@ public class SearchViewModel extends BaseObservable {
     }
 
     public void searchUser(String s) {
-        Log.i("SearchViewModel", "char -> " + s);
-        Query query = FirebaseDatabase.getInstance("https://instagram-clone-784ff-default-rtdb.asia-southeast1.firebasedatabase.app/")
+        Query query = FirebaseDatabase
+                .getInstance("https://instagram-clone-784ff-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference()
                 .child("Users")
                 .orderByChild("username")
@@ -60,6 +59,4 @@ public class SearchViewModel extends BaseObservable {
             }
         });
     }
-
-
 }

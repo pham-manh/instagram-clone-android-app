@@ -1,4 +1,4 @@
-package com.example.myapplication.view.fragment;
+package com.example.myapplication.ui.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -15,8 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.UserAdapter;
-import com.example.myapplication.databinding.FragmentSearchBinding;
-import com.example.myapplication.viewmodel.SearchViewModel;
+import com.example.myapplication.ui.viewmodel.SearchViewModel;
 import com.hendraanggrian.appcompat.socialview.widget.SocialAutoCompleteTextView;
 
 

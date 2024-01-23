@@ -6,13 +6,13 @@
 
         <variable
             name="searchFragmentViewModel"
-            type="com.example.myapplication.viewmodel.SearchViewModel" />
+            type="com.example.myapplication.ui.viewmodel.SearchViewModel" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.fragment.SearchFragment">
+        tools:context=".ui.view.fragment.SearchFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/action_bar"

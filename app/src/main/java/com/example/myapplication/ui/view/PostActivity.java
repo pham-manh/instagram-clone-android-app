@@ -1,4 +1,4 @@
-package com.example.myapplication.view;
+package com.example.myapplication.ui.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +12,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 
 import com.example.myapplication.R;
-import com.example.myapplication.databinding.ActivityPostBinding;
 import com.example.myapplication.utils.Activity;
 import com.example.myapplication.utils.ActivityUtils;
-import com.example.myapplication.viewmodel.PostViewModel;
+import com.example.myapplication.ui.viewmodel.PostViewModel;
 import com.hendraanggrian.appcompat.socialview.widget.SocialAutoCompleteTextView;
 import com.theartofdev.edmodo.cropper.CropImage;
 
