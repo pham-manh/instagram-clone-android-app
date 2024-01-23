@@ -36,11 +36,15 @@ android {
 }
 
 dependencies {
+    val room_version = "2.5.0"
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
+    //room databases
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
 
     //social view dependencies
     implementation("com.hendraanggrian.appcompat:socialview:0.1")
