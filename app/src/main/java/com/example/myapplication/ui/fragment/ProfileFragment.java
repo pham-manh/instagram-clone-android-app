@@ -12,7 +12,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.repository.datasource.remote.AuthService;
+import com.example.myapplication.data.repository.repository_impl.AuthRepository;
 import com.example.myapplication.ui.activities.StartActivity;
 
 public class ProfileFragment extends Fragment {
@@ -29,7 +29,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), StartActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                AuthService.signOutCurrentUser();
+                AuthRepository.getInstance().signOutCurrentUser();
                 startActivity(intent);
             }
         });

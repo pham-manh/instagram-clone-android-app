@@ -7,7 +7,7 @@ import androidx.databinding.Bindable;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.data.repository.datasource.remote.AuthService;
-import com.example.myapplication.data.repository.datasource.remote.MyOnCompleteListener;
+import com.example.myapplication.utils.callbacks.MyOnCompleteListener;
 import com.example.myapplication.utils.Activity;
 
 public class LoginViewModel extends BaseObservable {

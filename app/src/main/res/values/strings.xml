@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Instagam_Clone</string>
-    <string-array name="start_activity">
-        <item name="login_btn">Login</item>
-    </string-array>
+    <string name="register_message_success">Update the Profile for better experience</string>
+    <string name="common_message_empty_input">Empty credentials!!</string>
 </resources>

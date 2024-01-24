@@ -16,7 +16,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.BR;
 import com.example.myapplication.R;
-import com.example.myapplication.data.repository.datasource.remote.MyOnCompleteListener;
+import com.example.myapplication.utils.callbacks.MyOnCompleteListener;
 import com.example.myapplication.data.repository.datasource.remote.StorageService;
 import com.example.myapplication.utils.Activity;
 import com.hendraanggrian.appcompat.socialview.widget.SocialAutoCompleteTextView;

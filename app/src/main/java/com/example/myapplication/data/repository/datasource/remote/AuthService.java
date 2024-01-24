@@ -3,6 +3,7 @@ package com.example.myapplication.data.repository.datasource.remote;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import com.example.myapplication.utils.callbacks.MyOnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
@@ -10,11 +11,15 @@ import java.util.Objects;
 
 public class AuthService {
 
-    private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private static FirebaseAuth mAuth;
     private String msg;
 
     public AuthService() {
         mAuth = FirebaseAuth.getInstance();
+    }
+
+    public static AuthService getInstance() {
+        return new AuthService();
     }
 
     private boolean isValidEmail(String email) {
@@ -103,7 +108,7 @@ public class AuthService {
         }
     }
 
-    public static void signOutCurrentUser() {
+    public void signOutCurrentUser() {
         mAuth.signOut();
     }
 }

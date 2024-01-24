@@ -1,4 +1,4 @@
-package com.example.myapplication.data.repository.datasource.remote;
+package com.example.myapplication.utils.callbacks;
 
 public interface MyOnCompleteListener {
     void onSuccess(String successMessage);

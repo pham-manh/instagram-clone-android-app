@@ -1,5 +1,6 @@
 package com.example.myapplication.viewmodel;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import androidx.databinding.BaseObservable;
@@ -7,13 +8,21 @@ import androidx.databinding.Bindable;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.data.repository.datasource.remote.AuthService;
-import com.example.myapplication.data.repository.datasource.remote.MyOnCompleteListener;
+import com.example.myapplication.utils.StringResources;
+import com.example.myapplication.utils.callbacks.MyOnCompleteListener;
+import com.example.myapplication.data.repository.repository_impl.AuthRepository;
 import com.example.myapplication.utils.Activity;
 
 public class RegisterViewModel extends BaseObservable {
+    private StringResources stringResources;
+    private AuthRepository authRepository;
     private String username, name, email, password;
     public MutableLiveData<String> viewMessage = new MutableLiveData<>();
     public MutableLiveData<Activity> activityMutableLiveData = new MutableLiveData<>();
+
+    public RegisterViewModel(Context applicationContext) {
+        stringResources = new StringResources(applicationContext);
+    }
 
     @Bindable
     public String getUsername() {

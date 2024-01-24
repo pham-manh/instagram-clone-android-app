@@ -22,7 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         ActivityRegisterBinding activityBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_register);
-        activityBinding.setRegisterViewModel(new RegisterViewModel());
+        activityBinding.setRegisterViewModel(new RegisterViewModel(getApplicationContext()));
 
         activityBinding.getRegisterViewModel()
                 .getActivityMutableLiveData()
